@@ -2,7 +2,7 @@
 {
   home = {
     username = "killioiden";
-    homeDirectory = "/home/killioiden";
+    homeDirectory = "/home/dietpi";
     stateVersion = "26.05";
 
     packages = with pkgs; [
@@ -15,6 +15,11 @@
       fish
     ];
   };
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   programs.home-manager.enable = true;
 }

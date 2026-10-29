@@ -14,10 +14,9 @@
     { nixpkgs, home-manager, ... }:
     let
       system = "aarch64-linux";
-      username = builtins.getEnv "USER";
     in
     {
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.killioiden = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         modules = [
           ./home.nix

@@ -10,7 +10,7 @@
       system = "aarch64-linux";
       modules = [
         nixos-hardware.nixosModules.raspberry-pi-5
-        ({ lib, ... }: {
+        ({ lib, pkgs, ... }: {
           system.stateVersion = "26.05";
           boot.zfs.forceImportRoot = false;
           hardware.raspberry-pi.firmware.uboot.enable = true;
@@ -24,6 +24,20 @@
             ];
             password = "server";
           };
+
+          environment.systemPackages = with pkgs; [
+            curl
+            git
+            nano
+            networkmanager
+            openssh
+            fish
+            gh
+            home-manager
+            unzip
+            zip
+            wget
+          ];
 
           image.modules.sd-card = {
             boot.initrd.availableKernelModules = lib.mkForce [

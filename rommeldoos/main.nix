@@ -3,6 +3,7 @@
   imports = [
     ../killioiden/main.nix
     ../modules/main.nix
+    ./hardware-config.nix
   ];
 
   system.stateVersion = "26.05";

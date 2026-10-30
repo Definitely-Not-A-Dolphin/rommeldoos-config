@@ -1,26 +1,73 @@
 {
-  description = "Home Manager configuration";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
-  outputs =
-    { nixpkgs, home-manager, ... }:
-    let
+  outputs = { nixpkgs, nixos-hardware, ... }: {
+    nixosConfigurations.rpi500 = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
-    in
-    {
-      homeConfigurations.killioiden = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules = [
-          ./home.nix
-        ];
-      };
+      modules = [
+        nixos-hardware.nixosModules.raspberry-pi-5
+        ({ lib, ... }: {
+          system.stateVersion = "26.05";
+          boot.zfs.forceImportRoot = false;
+          hardware.raspberry-pi.firmware.uboot.enable = true;
+
+          users.users.killioiden = {
+            isNormalUser = true;
+            home = "/home/killioiden";
+            extraGroups = [
+              "networkmanager"
+              "wheel"
+            ];
+            password = "server";
+          };
+
+          image.modules.sd-card = {
+            boot.initrd.availableKernelModules = lib.mkForce [
+              "ahci"
+              "ata_piix"
+              "autofs"
+              "clk-rp1"
+              "efivarfs"
+              "ehci_hcd"
+              "ehci_pci"
+              "hid_apple"
+              "hid_cherry"
+              "hid_corsair"
+              "hid_generic"
+              "hid_lenovo"
+              "hid_logitech_dj"
+              "hid_logitech_hidpp"
+              "hid_microsoft"
+              "hid_roccat"
+              "mmc_block"
+              "nvme"
+              "ohci_hcd"
+              "ohci_pci"
+              "pata_marvell"
+              "pcie-brcmstb"
+              "rp1"
+              "sata_nv"
+              "sata_sis"
+              "sata_uli"
+              "sata_via"
+              "sd_mod"
+              "sr_mod"
+              #"tpm-crb"
+              #"tpm-tis"
+              "uhci_hcd"
+              "usb-storage"
+              "usbhid"
+              "vc4"
+              "xhci_hcd"
+              "xhci_pci"
+            ];
+          };
+        })
+      ];
     };
+  };
 }

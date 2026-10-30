@@ -13,7 +13,6 @@
       "networkmanager"
       "wheel"
     ];
-    password = "server";
     shell = pkgs.fish;
   };
 

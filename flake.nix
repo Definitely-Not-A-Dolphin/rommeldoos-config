@@ -15,7 +15,7 @@
   outputs =
     inputs@{ nixpkgs, nixos-hardware, ... }:
     {
-      nixosConfigurations.rpi500 = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.rommeldoos = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-5

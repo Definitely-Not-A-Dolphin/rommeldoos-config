@@ -2,6 +2,7 @@
 {
   imports = [
     inputs.home-manager.nixosModules.default
+    ./fastfetch.nix
     ./fish.nix
   ];
 

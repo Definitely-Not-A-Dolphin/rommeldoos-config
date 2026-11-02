@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ../killioiden/main.nix
-    ../modules/main.nix
+    ../killioiden
+    ../modules
     ./hardware-config.nix
     ./networking.nix
     ./raspi-compat.nix
@@ -24,6 +24,9 @@
     fish
     gh
     home-manager
+
+    # Hosties
+    deno
 
     # Misc
     fastfetch

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   name = "reboot-every-so-often";
 in
@@ -15,7 +15,7 @@ in
 
     services.${name} = {
       script = ''
-        sudo reboot
+        ${pkgs.sudo} reboot
       '';
       serviceConfig = {
         Type = "oneshot";

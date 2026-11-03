@@ -6,7 +6,10 @@ in
   systemd = {
     timers.${name} = {
       wantedBy = [ "timers.target" ];
-      timerConfigOnCalendar = "*-*-* 00:01:00 Europe/Amsterdam";
+      timerConfig = {
+        OnCalendar = "*-*-* 00:02:00 Europe/Amsterdam";
+        Unit = "${name}.service";
+      };
     };
 
     services.${name} = {

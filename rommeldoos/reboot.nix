@@ -15,7 +15,7 @@ in
 
     services.${name} = {
       script = ''
-        ${pkgs.sudo} reboot
+        ${pkgs.sudo}/bin/sudo reboot
       '';
       serviceConfig = {
         Type = "oneshot";

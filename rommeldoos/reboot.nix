@@ -7,8 +7,7 @@ in
     timers.${name} = {
       wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnBootSec = "2m";
-        #OnCalendar = "*-*-* 00:02:00 Europe/Amsterdam";
+        OnCalendar = "*-*-* 00:05:00 Europe/Amsterdam";
         Unit = "${name}.service";
       };
     };

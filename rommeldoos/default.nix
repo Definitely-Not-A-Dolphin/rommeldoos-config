@@ -6,6 +6,7 @@
     ./hardware-config.nix
     ./networking.nix
     ./raspi-compat.nix
+    ./reboot.nix
   ];
 
   environment.systemPackages = with pkgs; [
